@@ -1,17 +1,36 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { AiOutlineArrowRight as Arrow } from 'react-icons/ai'
 import { Link, useLocation } from 'react-router-dom'
 
 import Logo from '../../assets/sky-news-3.svg'
+import NewsModel from '../../models/news'
+import { getAllNews } from '../../services/news'
 import { dashboard, personalization } from './data/menus'
 import { LogoContainer, Menus, SideBarContainer } from './style'
 
 const SideBar: React.FC = () => {
+  const [news, setNews] = useState<NewsModel>()
   const location = useLocation()
 
   const [menuChildrenToBeShown, setMenuChildrenToBeShown] = useState<number[]>(
     []
   )
+
+  const getNews = useCallback(async () => {
+    const allNews = await getAllNews()
+
+    console.log({ allNews })
+
+    if (allNews) {
+      const pagination = allNews
+    }
+    if (allNews.data && allNews.data.length >= 0) {
+      setNews(allNews)
+    }
+  }, [])
+  useEffect(() => {
+    getNews()
+  }, [getNews])
 
   const showOrHideMenuChildren = (index: number) => {
     if (menuChildrenToBeShown.includes(index)) {

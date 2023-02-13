@@ -26,7 +26,7 @@ export const personalization = [
             <span className="text">Criar</span>
           </>
         ),
-        path: '/create-news'
+        path: '/news'
       }
     ]
   },
