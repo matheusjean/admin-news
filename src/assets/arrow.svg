@@ -1,0 +1,14 @@
+;<svg
+  width="8"
+  height="10"
+  viewBox="0 0 8 10"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    fillRule="current"
+    clipRule="evenodd"
+    d="M2.6875 0.625L0.9375 2.375L3.5625 5L0.9375 7.625L2.6875 9.375L7.0625 5L2.6875 0.625Z"
+    fill="currentColor"
+  />
+</svg>
