@@ -1,11 +1,21 @@
 import React from 'react'
-import { Routes as Switch, Route } from 'react-router-dom'
+import { Switch, Route, RouteProps } from 'react-router-dom'
 
 import DefaultLayout from '../../components/Layouts/DefaultLayout'
+import News from '../../pages/News'
+
+const Default = (props: RouteProps) => {
+  return (
+    <DefaultLayout>
+      <Route {...props} />
+    </DefaultLayout>
+  )
+}
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/" element={<DefaultLayout />} />
+      <Default exact path="/" />
+      <Default exact path="/news" component={News} />
     </Switch>
   )
 }
