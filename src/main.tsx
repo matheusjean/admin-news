@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import { ThemeProvider } from 'styled-components'
@@ -8,7 +8,7 @@ import App from './components/App'
 import GlobalStyles from './styles/global'
 import theme from './styles/theme'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -16,5 +16,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <App />
       </Router>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 )
