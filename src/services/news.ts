@@ -1,15 +1,36 @@
 import httpClient from '../http-client'
+import NewsForCreate from '../models/for-create/news'
 import News from '../models/news'
+import NewsData from '../models/newsData'
 
 interface NewsRequest {
   id?: string
   isActive?: boolean
 }
 
-const getAllNews = async (): Promise<News> => {
-  const authors = await httpClient.get('news')
+interface NewsCreateUpdate {
+  title: string
+}
 
-  return authors
+const getNews = async (newsId: string): Promise<News> => {
+  const news = (
+    await httpClient.get(`news
+  /${newsId}`)
+  ).data
+
+  return news
+}
+
+const createNews = async (newNews: NewsForCreate) => {
+  const createNewsResponse = (await httpClient.post<any>(`news`, newNews)).data
+
+  return createNewsResponse
+}
+
+const getAllNews = async (): Promise<NewsData> => {
+  const news = await httpClient.get('news')
+
+  return news
 }
 
 const deleteNews = async (newsId: string) => {
@@ -19,8 +40,24 @@ const deleteNews = async (newsId: string) => {
 const updateNewsById = async (
   newsId: string,
   data: NewsRequest
-): Promise<News> => {
+): Promise<NewsData> => {
   return (await httpClient.put(`news/${newsId}`, data)).data
 }
 
-export { getAllNews, deleteNews, updateNewsById }
+const updateNews = async (
+  newsId: string,
+  newsToBeUpdated: NewsCreateUpdate
+): Promise<News> => {
+  const news = (await httpClient.patch(`news/${newsId}`, newsToBeUpdated)).data
+
+  return news
+}
+
+export {
+  getNews,
+  createNews,
+  getAllNews,
+  deleteNews,
+  updateNewsById,
+  updateNews
+}
