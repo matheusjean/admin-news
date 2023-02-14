@@ -8,7 +8,7 @@ interface News {
       author: string
       image: string
       link: string
-      isActive: boolean
+      isActive: boolean | null
     }
   ]
 }

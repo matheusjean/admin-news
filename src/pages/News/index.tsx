@@ -12,7 +12,7 @@ import Checkbox from '../../components/Checkbox'
 import PageTitle from '../../components/PageTitle'
 import Table from '../../components/Table'
 import NewsModel from '../../models/news'
-import { deleteNews, getAllNews } from '../../services/news'
+import { deleteNews, getAllNews, updateNewsById } from '../../services/news'
 import { Container } from './styles'
 
 export default function News() {
@@ -72,6 +72,40 @@ export default function News() {
     [getNews]
   )
 
+  const inactivateNews = useCallback(
+    async (newsId: string, isActive: boolean) => {
+      Swal.fire({
+        title: '<strong>Confirmação</strong>',
+        icon: 'question',
+        html: 'Tem certeza que deseja intativar esta notícia?',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        focusConfirm: false
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            // eslint-disable-next-line object-shorthand
+            await updateNewsById(newsId, { isActive: isActive })
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Sucesso!',
+              text: 'Notícia inativada com sucesso!'
+            })
+            await getNews()
+          } catch (e) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Erro ao inativar notícia',
+              text: e.message
+            })
+          }
+        }
+      })
+    },
+    [getNews]
+  )
+
   const newsToBeShown = useMemo(() => {
     return news
       ? news.data.map((news) => ({
@@ -101,7 +135,15 @@ export default function News() {
                 gap: '5px'
               }}
             >
-              <AiOutlineCheck size={25} />
+              {news.isActive ? (
+                <>
+                  <AiOutlineCheck size={25} />
+                </>
+              ) : (
+                <>
+                  <AiOutlineClose size={25} />
+                </>
+              )}
             </div>
           ),
 
@@ -127,6 +169,9 @@ export default function News() {
                 className="small danger"
                 title="Inativar noticia"
                 styleButton="attencion"
+                onClick={() => {
+                  inactivateNews(news.id, !news.isActive)
+                }}
               >
                 <div>
                   <AiOutlineClose className="icon-danger" />
@@ -147,7 +192,7 @@ export default function News() {
           )
         }))
       : []
-  }, [news, removeNews])
+  }, [news, removeNews, inactivateNews])
 
   return (
     <Container>
