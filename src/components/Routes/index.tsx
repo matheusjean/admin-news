@@ -18,6 +18,7 @@ export default function Routes() {
       <Default exact path="/" />
       <Default exact path="/news" component={News} />
       <Default exact path="/create-news" component={CreateAndEditNews} />
+      <Default exact path="/edit-news/:newsId" component={CreateAndEditNews} />
     </Switch>
   )
 }

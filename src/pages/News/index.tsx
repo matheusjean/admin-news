@@ -24,6 +24,13 @@ export default function News() {
     history.push('create-news')
   }
 
+  const editNews = useCallback(
+    (newsId: string) => {
+      history.push(`edit-news/${newsId}`)
+    },
+    [history]
+  )
+
   const getNews = useCallback(async () => {
     const allNews = await getAllNews()
 
@@ -166,6 +173,7 @@ export default function News() {
                 className="small danger"
                 title="Editar notícia"
                 styleButton="edit"
+                onClick={() => editNews(news.id)}
               >
                 <div>
                   <AiOutlineEdit className="icon-danger" />
