@@ -3,6 +3,8 @@ import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { BiTrash } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
+import Swal from 'sweetalert2'
+
 import Box from '../../components/Box'
 import BreadCrumb from '../../components/BreadCrumb'
 import Button from '../../components/Button'
@@ -10,7 +12,7 @@ import Checkbox from '../../components/Checkbox'
 import PageTitle from '../../components/PageTitle'
 import Table from '../../components/Table'
 import NewsModel from '../../models/news'
-import { getAllNews } from '../../services/news'
+import { deleteNews, getAllNews } from '../../services/news'
 import { Container } from './styles'
 
 export default function News() {
@@ -26,6 +28,49 @@ export default function News() {
   useEffect(() => {
     getNews()
   }, [getNews])
+
+  const removeNews = useCallback(
+    async (newsId: string) => {
+      Swal.fire({
+        title: '<strong>Confirmação</strong>',
+
+        html: 'Tem certeza que deseja remover esta notícia?',
+
+        showCancelButton: true,
+
+        cancelButtonText: 'Cancelar',
+
+        focusConfirm: false
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await deleteNews(newsId)
+
+            Swal.fire({
+              icon: 'success',
+
+              title: 'Sucesso!',
+
+              text: 'Notícia excluída com sucesso!'
+            })
+
+            await getNews()
+          } catch (error) {
+            Swal.fire({
+              icon: 'error',
+
+              title: 'Erro',
+
+              text: `Erro ao excluir notícia. ${
+                error.response ? 'Esta não foi excluída' : error.message
+              }`
+            })
+          }
+        }
+      })
+    },
+    [getNews]
+  )
 
   const newsToBeShown = useMemo(() => {
     return news
@@ -92,6 +137,7 @@ export default function News() {
                 className="small danger"
                 title="Excluir noticia"
                 styleButton="danger"
+                onClick={() => removeNews(news.id)}
               >
                 <div>
                   <BiTrash className="icon-danger" />
@@ -101,7 +147,7 @@ export default function News() {
           )
         }))
       : []
-  }, [news])
+  }, [news, removeNews])
 
   return (
     <Container>
