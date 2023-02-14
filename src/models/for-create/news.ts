@@ -1,5 +1,4 @@
-interface News {
-  id: string
+interface NewsForCreate {
   hat: string
   title: string
   text: string
@@ -9,4 +8,4 @@ interface News {
   isActive: boolean | null
 }
 
-export default News
+export default NewsForCreate
