@@ -1,7 +1,7 @@
 import react, { useEffect, useState, useCallback, useMemo } from 'react'
 import { AiOutlineCheck, AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { BiTrash } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import Swal from 'sweetalert2'
 
@@ -11,12 +11,19 @@ import Button from '../../components/Button'
 import Checkbox from '../../components/Checkbox'
 import PageTitle from '../../components/PageTitle'
 import Table from '../../components/Table'
-import NewsModel from '../../models/news'
+import NewsModel from '../../models/newsData'
 import { deleteNews, getAllNews, updateNewsById } from '../../services/news'
 import { Container } from './styles'
 
 export default function News() {
   const [news, setNews] = useState<NewsModel>()
+
+  const history = useHistory()
+
+  const createNews = (): void => {
+    history.push('create-news')
+  }
+
   const getNews = useCallback(async () => {
     const allNews = await getAllNews()
 
@@ -209,7 +216,7 @@ export default function News() {
       <PageTitle>Notícias</PageTitle>
 
       <Box padding="0 0 20px 0">
-        <Button>CRIAR NOTÍCIA</Button>
+        <Button onClick={createNews}>CRIAR NOTÍCIA</Button>
       </Box>
 
       <Table
