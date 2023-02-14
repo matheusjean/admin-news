@@ -19,16 +19,7 @@ export const personalization = [
         <span className="text">Notícia</span>
       </>
     ),
-    children: [
-      {
-        label: (
-          <>
-            <span className="text">Criar</span>
-          </>
-        ),
-        path: '/news'
-      }
-    ]
+    path: '/news'
   },
   {
     label: (
@@ -40,15 +31,6 @@ export const personalization = [
         <span className="text">Categorias</span>
       </>
     ),
-    children: [
-      {
-        label: (
-          <>
-            <span className="text">Criar</span>
-          </>
-        ),
-        path: '/create-category'
-      }
-    ]
+    path: '/category'
   }
 ]
