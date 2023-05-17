@@ -9,7 +9,7 @@
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/matheusjean/admin-news">
 
   <a href="https://www.linkedin.com/in/matheus-jean-a909b6b9/">
-      <img alt="Made by Matheus Jean" src="https://img.shields.io/badge/made%20by-Matheus Jean-blue">
+      <img alt="Created by Matheus Jean" src="https://img.shields.io/badge/made%20by-Matheus Jean-blue">
   </a>
 
   <a href="https://github.com/matheusjean/admin-news/commits/main">
