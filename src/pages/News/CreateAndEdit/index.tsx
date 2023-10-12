@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
+import Select from 'react-select';
 
 import Swal from 'sweetalert2'
 
@@ -11,8 +12,11 @@ import Input from '../../../components/Input'
 import InputText from '../../../components/InputText'
 import Label from '../../../components/Label'
 import PageTitle from '../../../components/PageTitle'
+import InputSelect from '../../../components/Select'
 import ToggleSwitch from '../../../components/ToggleSwitch'
 import checkEmptyString from '../../../helpers/check-empty-string'
+import Categories from '../../../models/categories'
+import { getAllCategories } from '../../../services/categories'
 import {
   getNews as getNewsService,
   createNews as createNewsResponse,
@@ -32,6 +36,10 @@ export default function CreateAndEditNews() {
   const [image, setImage] = useState('')
   const [link, setLink] = useState('')
   const [isActive, setIsActive] = useState<boolean>(true)
+  const [categories, setCategories] = useState<Categories>()
+  const [categoriesSelected, setCategoriesSelected] = useState(
+    [] as { label: string; value: string }[]
+  )
   const { newsId } = useParams<CreateAndEditNewsProps>()
 
   const isEditting = useMemo(() => {
@@ -42,26 +50,47 @@ export default function CreateAndEditNews() {
     return false
   }, [newsId])
 
+  const getCategories = async () => {
+    try {
+      const allCategories = await getAllCategories();
+      if (allCategories.data && allCategories.data.length > 0) {
+        setCategories(allCategories);
+      }
+    } catch (error) {
+      console.error("Erro ao obter categorias:", error);
+    }
+  }
+
   const getNews = useCallback(async () => {
     if (newsId) {
       try {
-        const news = await getNewsService(newsId)
-        setTitle(news.title)
-        setHat(news.hat)
-        setText(news.text)
-        setAuthor(news.author)
-        setImage(news.image)
-        setLink(news.link)
-        setIsActive(news.isActive)
+        const news = await getNewsService(newsId);
+
+        setTitle(news.title);
+        setHat(news.hat);
+        setText(news.text);
+        setAuthor(news.author);
+        setImage(news.image);
+        setLink(news.link);
+        setIsActive(news.isActive);
+
+        const newsCategories = news.categories;
+
+        const categoryObjects = newsCategories.map((category) => ({
+          label: category.name,
+          value: category.id
+        }));
+
+        setCategoriesSelected(categoryObjects);
       } catch (error) {
         Swal.fire({
           title: 'Erro',
           text: 'Houve um erro ao buscar a notícia. ' + error.message,
-          icon: 'error'
-        })
+          icon: 'error',
+        });
       }
     }
-  }, [newsId])
+  }, [newsId]);
 
   const history = useHistory()
 
@@ -72,6 +101,7 @@ export default function CreateAndEditNews() {
       if (checkEmptyString(title)) {
         throw new Error('Informe um nome válido para a notícia.')
       }
+      const selectedCategoryIds = categoriesSelected.map((category) => category.value);
 
       await createNewsResponse({
         title,
@@ -80,7 +110,8 @@ export default function CreateAndEditNews() {
         author,
         link,
         isActive,
-        image
+        image,
+        categoryIds: selectedCategoryIds,
       })
 
       Swal.fire({
@@ -102,8 +133,11 @@ export default function CreateAndEditNews() {
       })
     }
   }
+
   const updateNews = async (event: React.FormEvent) => {
     event.preventDefault()
+
+    const selectedCategoryIds = categoriesSelected.map((category) => category.value);
 
     try {
       const newsToBeUpdated = {
@@ -113,7 +147,8 @@ export default function CreateAndEditNews() {
         author,
         link,
         isActive,
-        image
+        image,
+        categoryIds: selectedCategoryIds
       }
 
       await updateNewsService(newsId, newsToBeUpdated)
@@ -134,7 +169,20 @@ export default function CreateAndEditNews() {
 
   useEffect(() => {
     getNews()
+    getCategories()
   }, [getNews])
+
+  const categoriesToBeShown = useMemo(() => {
+    if (categories && categories.data && categories.data.length > 0) {
+      return categories.data.map((tag) => ({
+        label: tag.name,
+        value: `${tag.id}`
+      }));
+    } else {
+      return [];
+    }
+  }, [categories]);
+
 
   return (
     <Container>
@@ -218,6 +266,18 @@ export default function CreateAndEditNews() {
             onChange={(e) => setLink(e.target.value)}
           />
         </FormInputs>
+
+        <InputSelect
+          title="Categorias"
+          options={categoriesToBeShown}
+          value={categoriesSelected}
+          closeMenuOnSelect={false}
+          onChange={(options) => {
+            if (options && !isNaN(options.length)) {
+              setCategoriesSelected(options.map((opt) => ({ label: opt.label, value: opt.value })));
+            }
+          }}
+        />
 
         <ToggleSwitch
           label="Desativar"
