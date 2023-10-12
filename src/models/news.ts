@@ -1,12 +1,23 @@
 interface News {
-  id: string
-  hat: string
-  title: string
-  text: string
-  author: string
-  image: string
-  link: string
-  isActive: boolean | null
+  author: string;
+  hat: string;
+  id: string;
+  image: string;
+  isActive: boolean;
+  link: string;
+  text: string;
+  title: string;
+  categories: [
+    {
+      created_at: string;
+      id: string;
+      isActive: boolean;
+      name: string;
+      updated_at: Date;
+    }
+  ];
+  created_at: Date;
+  updated_at: Date;
 }
 
-export default News
+export default News;
