@@ -110,12 +110,6 @@ const Table: React.FC<ITableProps> = ({
     }
   }, [items])
 
-  // We start with an empty list of items.
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-
-  // Invoke when user click to request another page.
-
   return (
     <S.TableWrapper>
       <S.Table>
