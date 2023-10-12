@@ -16,6 +16,7 @@ interface News {
       updated_at: Date;
     }
   ];
+  categoriesToRemove: string[];
   created_at: Date;
   updated_at: Date;
 }
