@@ -1,8 +1,8 @@
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from "styled-components";
 
 type ContainerProps = {
-  styleButton?: string
-}
+  styleButton?: string;
+};
 
 const containerMapper = {
   default: (theme: DefaultTheme) => css`
@@ -74,13 +74,11 @@ const containerMapper = {
     font-weight: ${theme.font.bold};
     padding: 1.5rem 2rem;
     min-width: 14.9rem;
-  `
-}
+  `,
+};
 
-export const Container = styled.button.attrs((props: ContainerProps) => ({
-  styleButton: props.styleButton
-}))`
-  ${({ theme, styleButton = 'default' }) => css`
+export const Container = styled.button<ContainerProps>`
+  ${({ theme, styleButton = "default" }) => css`
     border: none;
     cursor: pointer;
     outline: none;
@@ -103,7 +101,7 @@ export const Container = styled.button.attrs((props: ContainerProps) => ({
     ${!!styleButton &&
     (containerMapper as Record<string, any | undefined>)[styleButton](theme)}
   `}
-`
+`;
 
 export const Button = styled.button`
   ${({ theme }) => css`
@@ -145,4 +143,4 @@ export const Button = styled.button`
   &.small {
     padding: 3px 6px;
   }
-`
+`;
