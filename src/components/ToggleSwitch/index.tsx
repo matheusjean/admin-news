@@ -29,7 +29,7 @@ export default function ToggleSwitch({
           borderRadius={20}
           activeBoxShadow="none"
           offHandleColor="#fff"
-          onHandleColor="#E4672E"
+          onHandleColor="#70b8ff"
           checkedIcon={
             <div
               style={{
@@ -39,7 +39,7 @@ export default function ToggleSwitch({
                 height: '100%',
                 background: 'transparent',
                 fontSize: 12,
-                color: '#E4672E',
+                color: '#70b8ff',
                 paddingRight: 2
               }}
             >

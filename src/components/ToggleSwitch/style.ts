@@ -13,9 +13,11 @@ export const Container = styled.div`
 `
 
 export const Toggle = styled.div<containerProps>`
-  ${({ isChecked = false }) => css`
+  ${({ isChecked = false, theme }) => css`
     > div {
-      border: ${isChecked ? '1px solid #E4672E' : '1px solid white'};
+      border: ${isChecked
+        ? `1px solid ${theme.colors.primary}`
+        : `1px solid ${theme.colors.primary}`};
     }
   `}
 `
