@@ -16,6 +16,7 @@ interface NewsCreateUpdate {
   image: string;
   link: string;
   isActive: boolean;
+  categoryIds: string[];
 }
 
 const getNews = async (newsId: string): Promise<News> => {
@@ -25,7 +26,9 @@ const getNews = async (newsId: string): Promise<News> => {
 };
 
 const createNews = async (newNews: NewsForCreate) => {
-  const createNewsResponse = (await httpClient.post<any>(`news`, newNews)).data;
+  const createNewsResponse = (
+    await httpClient.post<NewsForCreate>(`news`, newNews)
+  ).data;
 
   return createNewsResponse;
 };
