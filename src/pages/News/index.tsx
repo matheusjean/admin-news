@@ -75,9 +75,8 @@ export default function News() {
 
               title: 'Erro',
 
-              text: `Erro ao excluir notícia. ${
-                error.response ? 'Esta não foi excluída' : error.message
-              }`
+              text: `Erro ao excluir notícia. ${error.response ? 'Esta não foi excluída' : error.message
+                }`
             })
           }
         }
@@ -123,91 +122,100 @@ export default function News() {
   const newsToBeShown = useMemo(() => {
     return news
       ? news.data.map((news) => ({
-          selectAll: (
-            <div
-              style={{
-                display: 'flex',
+        selectAll: (
+          <div
+            style={{
+              display: 'flex',
 
-                gap: '5px'
+              gap: '5px'
+            }}
+          >
+            <Checkbox />
+          </div>
+        ),
+
+        id: news.id,
+
+        categoria: Array.isArray(news.categories)
+          ? news.categories.map((category) => {
+            if (typeof category === 'object' && category.name) {
+              return category.name;
+            }
+            return '';
+          }).join(', ')
+          : '',
+
+        title: news.title,
+
+        hat: news.hat,
+
+        active: (
+          <div
+            style={{
+              display: 'flex',
+
+              gap: '5px'
+            }}
+          >
+            {news.isActive ? (
+              <>
+                <AiOutlineCheck size={25} />
+              </>
+            ) : (
+              <>
+                <AiOutlineClose size={25} />
+              </>
+            )}
+          </div>
+        ),
+
+        actions: (
+          <div
+            style={{
+              display: 'flex',
+
+              gap: '5px'
+            }}
+          >
+            <Button
+              className="small danger"
+              title="Editar notícia"
+              styleButton="edit"
+              onClick={() => editNews(news.id)}
+            >
+              <div>
+                <AiOutlineEdit className="icon-danger" />
+              </div>
+            </Button>
+
+            <Button
+              className="small danger"
+              title="Inativar noticia"
+              styleButton="attencion"
+              onClick={() => {
+                inactivateNews(news.id, !news.isActive)
               }}
             >
-              <Checkbox />
-            </div>
-          ),
+              <div>
+                <AiOutlineClose className="icon-danger" />
+              </div>
+            </Button>
 
-          id: news.id,
-
-          title: news.title,
-
-          hat: news.hat,
-
-          active: (
-            <div
-              style={{
-                display: 'flex',
-
-                gap: '5px'
-              }}
+            <Button
+              className="small danger"
+              title="Excluir noticia"
+              styleButton="danger"
+              onClick={() => removeNews(news.id)}
             >
-              {news.isActive ? (
-                <>
-                  <AiOutlineCheck size={25} />
-                </>
-              ) : (
-                <>
-                  <AiOutlineClose size={25} />
-                </>
-              )}
-            </div>
-          ),
-
-          actions: (
-            <div
-              style={{
-                display: 'flex',
-
-                gap: '5px'
-              }}
-            >
-              <Button
-                className="small danger"
-                title="Editar notícia"
-                styleButton="edit"
-                onClick={() => editNews(news.id)}
-              >
-                <div>
-                  <AiOutlineEdit className="icon-danger" />
-                </div>
-              </Button>
-
-              <Button
-                className="small danger"
-                title="Inativar noticia"
-                styleButton="attencion"
-                onClick={() => {
-                  inactivateNews(news.id, !news.isActive)
-                }}
-              >
-                <div>
-                  <AiOutlineClose className="icon-danger" />
-                </div>
-              </Button>
-
-              <Button
-                className="small danger"
-                title="Excluir noticia"
-                styleButton="danger"
-                onClick={() => removeNews(news.id)}
-              >
-                <div>
-                  <BiTrash className="icon-danger" />
-                </div>
-              </Button>
-            </div>
-          )
-        }))
+              <div>
+                <BiTrash className="icon-danger" />
+              </div>
+            </Button>
+          </div>
+        )
+      }))
       : []
-  }, [news, removeNews, inactivateNews])
+  }, [news, removeNews, inactivateNews, editNews])
 
   return (
     <Container>
@@ -240,6 +248,13 @@ export default function News() {
 
             propName: 'title'
           },
+
+          {
+            headerLabel: <span>Categorias</span>,
+
+            propName: 'categoria'
+          },
+
 
           {
             headerLabel: <span>Hat</span>,
