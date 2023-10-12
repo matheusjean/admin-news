@@ -10,7 +10,7 @@ const theme: DefaultTheme = {
     extra_bold: 800
   },
   colors: {
-    primary: '#E4672E',
+    primary: '#70b8ff',
     white: '#FFFFFF',
     black: '#101010',
     gray: 'rgba(255, 255, 255, 0.4)',
