@@ -200,7 +200,7 @@ export default function CreateAndEditNews() {
     <Container>
       <BreadCrumb
         crumbs={[
-          <Link key={1} to="/home">
+          <Link key={1} to="/">
             Início
           </Link>,
 
