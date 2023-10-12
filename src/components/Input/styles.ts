@@ -12,7 +12,9 @@ export const InputContainer = styled.input`
   padding: 8px 15px;
 
   &:focus {
-    border-color: #e4672e;
+    ${({ theme }) => css`
+      border-color: ${theme.colors.primary};
+    `}
   }
 
   &:disabled {
