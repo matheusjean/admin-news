@@ -40,6 +40,7 @@ export default function CreateAndEditNews() {
   const [categoriesSelected, setCategoriesSelected] = useState(
     [] as { label: string; value: string }[]
   )
+  const [categoriesToRemove, setCategoriesToRemove] = useState<string[]>([]);
   const { newsId } = useParams<CreateAndEditNewsProps>()
 
   const isEditting = useMemo(() => {
@@ -135,11 +136,23 @@ export default function CreateAndEditNews() {
   }
 
   const updateNews = async (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const selectedCategoryIds = categoriesSelected.map((category) => category.value);
 
     try {
+      if (categoriesToRemove.length > 0) {
+        const newsToBeUpdated = {
+          categoriesToRemove
+        };
+        await updateNewsService(newsId, newsToBeUpdated);
+      }
+      setCategoriesToRemove([]);
+
+      const uniqueSelectedCategoryIds = selectedCategoryIds.filter(
+        (categoryId) => categoriesSelected.some((category) => category.value === categoryId)
+      );
+
       const newsToBeUpdated = {
         title,
         hat,
@@ -148,24 +161,24 @@ export default function CreateAndEditNews() {
         link,
         isActive,
         image,
-        categoryIds: selectedCategoryIds
-      }
+        categoryIds: uniqueSelectedCategoryIds && selectedCategoryIds
+      };
 
-      await updateNewsService(newsId, newsToBeUpdated)
+      await updateNewsService(newsId, newsToBeUpdated);
       Swal.fire({
         title: 'Sucesso!',
         text: 'Notícia editada com sucesso!',
         icon: 'success'
-      })
-      history.push('/news')
+      });
+      history.push('/news');
     } catch (error: any) {
       Swal.fire({
         title: 'Erro',
         text: 'Houve um erro ao editar a notícia. ' + error.message,
         icon: 'error'
-      })
+      });
     }
-  }
+  };
 
   useEffect(() => {
     getNews()
@@ -182,7 +195,6 @@ export default function CreateAndEditNews() {
       return [];
     }
   }, [categories]);
-
 
   return (
     <Container>
@@ -274,7 +286,17 @@ export default function CreateAndEditNews() {
           closeMenuOnSelect={false}
           onChange={(options) => {
             if (options && !isNaN(options.length)) {
-              setCategoriesSelected(options.map((opt) => ({ label: opt.label, value: opt.value })));
+              const removedCategories = categoriesSelected.filter(
+                (category) => !options.find((opt) => opt.value === category.value)
+              );
+
+              setCategoriesToRemove(removedCategories.map((cat) => cat.value));
+
+              setCategoriesSelected(options);
+            } else {
+              const allCategoryValues = categoriesSelected.map((cat) => cat.value);
+              setCategoriesToRemove(allCategoryValues);
+              setCategoriesSelected([]);
             }
           }}
         />

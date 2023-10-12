@@ -9,14 +9,15 @@ interface NewsRequest {
 }
 
 interface NewsCreateUpdate {
-  hat: string;
-  title: string;
-  text: string;
-  author: string;
-  image: string;
-  link: string;
-  isActive: boolean;
-  categoryIds: string[];
+  hat?: string;
+  title?: string;
+  text?: string;
+  author?: string;
+  image?: string;
+  link?: string;
+  isActive?: boolean;
+  categoryIds?: string[];
+  categoriesToRemove?: string[];
 }
 
 const getNews = async (newsId: string): Promise<News> => {
@@ -52,7 +53,7 @@ const updateNewsById = async (
 
 const updateNews = async (
   newsId: string,
-  newsToBeUpdated: NewsCreateUpdate
+  newsToBeUpdated?: NewsCreateUpdate
 ): Promise<News> => {
   const news = (await httpClient.put(`news/${newsId}`, newsToBeUpdated)).data;
 
