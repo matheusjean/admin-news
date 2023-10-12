@@ -1,11 +1,12 @@
 interface NewsForCreate {
-  hat: string
-  title: string
-  text: string
-  author: string
-  image: string
-  link: string
-  isActive: boolean | null
+  author: string;
+  hat: string;
+  image: string;
+  isActive: boolean;
+  link: string;
+  text: string;
+  title: string;
+  categoryIds: string[];
 }
 
-export default NewsForCreate
+export default NewsForCreate;
