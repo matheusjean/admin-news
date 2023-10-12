@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route, RouteProps } from 'react-router-dom'
 
 import DefaultLayout from '../../components/Layouts/DefaultLayout'
+import Category from '../../pages/Category'
 import News from '../../pages/News'
 import CreateAndEditNews from '../../pages/News/CreateAndEdit'
 
@@ -19,6 +20,8 @@ export default function Routes() {
       <Default exact path="/news" component={News} />
       <Default exact path="/create-news" component={CreateAndEditNews} />
       <Default exact path="/edit-news/:newsId" component={CreateAndEditNews} />
+
+      <Default exact path="/category" component={Category} />
     </Switch>
   )
 }
