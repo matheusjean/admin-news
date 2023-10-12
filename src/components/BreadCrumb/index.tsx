@@ -1,19 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-import { BreadCrumbContainer } from './style'
+import { BreadCrumbContainer } from './style';
 
 interface BreadCrumbProps {
-  crumbs: React.ReactElement[]
+  crumbs: React.ReactElement[];
 }
 
 const BreadCrumb: React.FC<BreadCrumbProps> = ({ crumbs }) => (
   <BreadCrumbContainer>
-    {crumbs && crumbs.length ? (
-      crumbs.map((crumb, index) => ({ ...crumb, key: index }))
-    ) : (
-      <></>
-    )}
+    {crumbs.map((crumb, index) => (
+      <div key={index}>{crumb}</div>
+    ))}
   </BreadCrumbContainer>
-)
+);
 
-export default BreadCrumb
+export default BreadCrumb;

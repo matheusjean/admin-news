@@ -1,11 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 
 const BreadCrumbContainer = styled.div`
+  display: flex;
   margin-bottom: 2.5rem;
 
   & > :not(:first-child) {
     &::before {
-      content: ' / ';
+      content: " / ";
       margin: 0 0.3rem;
     }
   }
@@ -18,6 +19,6 @@ const BreadCrumbContainer = styled.div`
       font-size: ${theme.sizes.medium};
     }
   `}
-`
+`;
 
-export { BreadCrumbContainer }
+export { BreadCrumbContainer };
