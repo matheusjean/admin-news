@@ -1,11 +1,11 @@
-import axios from 'axios'
+import axios from "axios";
 
 const httpClient = axios.create({
-  baseURL: 'http://localhost:3333/',
+  baseURL: "https://news-with-prisma.vercel.app/",
 
   headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
-  }
-})
-export default httpClient
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+});
+export default httpClient;
