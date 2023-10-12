@@ -13,15 +13,18 @@
     "@types/react-icons": "^3.0.0",
     "axios": "^0.27.2",
     "eslint-init": "^0.1.12",
-    "react": "^18.2.0",
-    "react-dom": "^17.0.1",
+    "react": "18",
+    "react-dom": "18",
+    "react-dropdown-select": "^4.10.0",
     "react-icons": "^4.7.1",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.3.6",
-    "sweetalert2": "^11.7.1",
-    "react-switch": "^7.0.0"
+    "react-select": "^5.7.7",
+    "react-switch": "^7.0.0",
+    "styled-components": "^6.0.8",
+    "sweetalert2": "^11.7.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^17.0.1",
     "@types/react-router-dom": "^5.1.7",
@@ -31,7 +34,9 @@
     "@vitejs/plugin-react": "^2.2.0",
     "eslint": "^8.27.0",
     "eslint-plugin-react": "^7.31.10",
+    "prop-types": "^15.8.1",
+    "react-is": "^18.2.0",
     "typescript": "^4.6.4",
-    "vite": "^3.2.3"
+    "vite": "^4.4.11"
   }
 }
