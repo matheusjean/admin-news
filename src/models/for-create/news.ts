@@ -1,5 +1,4 @@
 interface NewsForCreate {
-  author: string;
   hat: string;
   image: string;
   isActive: boolean;

@@ -32,7 +32,6 @@ export default function CreateAndEditNews() {
   const [title, setTitle] = useState('')
   const [hat, setHat] = useState('')
   const [text, setText] = useState('')
-  const [author, setAuthor] = useState('')
   const [image, setImage] = useState('')
   const [link, setLink] = useState('')
   const [isActive, setIsActive] = useState<boolean>(true)
@@ -70,7 +69,6 @@ export default function CreateAndEditNews() {
         setTitle(news.title);
         setHat(news.hat);
         setText(news.text);
-        setAuthor(news.author);
         setImage(news.image);
         setLink(news.link);
         setIsActive(news.isActive);
@@ -108,7 +106,6 @@ export default function CreateAndEditNews() {
         title,
         hat,
         text,
-        author,
         link,
         isActive,
         image,
@@ -157,7 +154,6 @@ export default function CreateAndEditNews() {
         title,
         hat,
         text,
-        author,
         link,
         isActive,
         image,
@@ -237,19 +233,6 @@ export default function CreateAndEditNews() {
             required
             value={hat}
             onChange={(e) => setHat(e.target.value)}
-          />
-        </FormInputs>
-
-        <FormInputs>
-          <Label className="required" htmlFor="author">
-            Autor
-          </Label>
-
-          <Input
-            id="author"
-            required
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
           />
         </FormInputs>
 
