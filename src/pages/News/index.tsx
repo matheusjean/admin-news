@@ -33,7 +33,6 @@ export default function News() {
 
   const getNews = useCallback(async () => {
     const allNews = await getAllNews()
-    console.log({allNews});
 
     if (allNews.data && allNews.data.length >= 0) {
       setNews(allNews)

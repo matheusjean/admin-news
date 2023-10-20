@@ -11,7 +11,6 @@ export default function Login() {
 
   const signIn = (event: React.FormEvent) => {
     event.preventDefault()
-    console.log('Função signIn sendo chamada');
     return login({ email, password })
   }
 
