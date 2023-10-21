@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
-import Select from 'react-select';
 
 import Swal from 'sweetalert2'
 
@@ -9,9 +8,9 @@ import Button from '../../../components/Button'
 import Form from '../../../components/Form'
 import FormInputs from '../../../components/FormInputs'
 import Input from '../../../components/Input'
-import InputText from '../../../components/InputText'
 import Label from '../../../components/Label'
 import PageTitle from '../../../components/PageTitle'
+import RichTextEditor from '../../../components/RichText';
 import InputSelect from '../../../components/Select'
 import ToggleSwitch from '../../../components/ToggleSwitch'
 import checkEmptyString from '../../../helpers/check-empty-string'
@@ -31,9 +30,9 @@ interface CreateAndEditNewsProps {
 export default function CreateAndEditNews() {
   const [title, setTitle] = useState('')
   const [hat, setHat] = useState('')
-  const [text, setText] = useState('')
-  const [image, setImage] = useState('')
-  const [link, setLink] = useState('')
+  const [text, setText] = useState('Valor Inicial')
+  const [image, setImage] = useState('https://noticias.maisesports.com.br/wp-content/uploads/2023/06/cs-2-inferno-4.jpg')
+  const [link, setLink] = useState('deixe vazio')
   const [isActive, setIsActive] = useState<boolean>(true)
   const [categories, setCategories] = useState<Categories>()
   const [categoriesSelected, setCategoriesSelected] = useState(
@@ -295,12 +294,8 @@ export default function CreateAndEditNews() {
             Texto
           </Label>
 
-          <InputText
-            id="text"
-            required
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
+          <RichTextEditor teste={text} onChange={setText} />
+
         </FormInputs>
 
         <FormButtons>
