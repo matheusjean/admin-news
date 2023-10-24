@@ -34,6 +34,7 @@ export default function CreateAndEditNews() {
   const [image, setImage] = useState('https://noticias.maisesports.com.br/wp-content/uploads/2023/06/cs-2-inferno-4.jpg')
   const [link, setLink] = useState('deixe vazio')
   const [isActive, setIsActive] = useState<boolean>(true)
+  const [isHighlighted, setIsHighlighted] = useState<number>()
   const [categories, setCategories] = useState<Categories>()
   const [categoriesSelected, setCategoriesSelected] = useState(
     [] as { label: string; value: string }[]
@@ -70,6 +71,7 @@ export default function CreateAndEditNews() {
         setText(news.text);
         setImage(news.image);
         setLink(news.link);
+        setIsHighlighted(news.isHighlighted)
         setIsActive(news.isActive);
 
         const newsCategories = news.categories;
@@ -108,6 +110,7 @@ export default function CreateAndEditNews() {
         link,
         isActive,
         image,
+        isHighlighted,
         categoryIds: selectedCategoryIds,
       })
 
@@ -245,6 +248,19 @@ export default function CreateAndEditNews() {
             required
             value={image}
             onChange={(e) => setImage(e.target.value)}
+          />
+        </FormInputs>
+
+        <FormInputs>
+          <Label className="required" htmlFor="destaque">
+            DESTAQUE ? insira (1, 2 ou 3) apenas
+          </Label>
+
+          <Input
+            id="destaque"
+            type="number"
+            value={isHighlighted}
+            onChange={(e) => setIsHighlighted(e.target.value)}
           />
         </FormInputs>
 
