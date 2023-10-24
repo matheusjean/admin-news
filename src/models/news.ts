@@ -6,6 +6,7 @@ interface News {
   isActive: boolean;
   link: string;
   text: string;
+  isHighlighted: number;
   title: string;
   categories: [
     {
