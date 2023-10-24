@@ -3,6 +3,7 @@ interface NewsForCreate {
   image: string;
   isActive: boolean;
   link: string;
+  isHighlighted?: number;
   text: string;
   title: string;
   categoryIds: string[];
