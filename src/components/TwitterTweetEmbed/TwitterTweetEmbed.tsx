@@ -15,21 +15,9 @@ interface JSONObject {
 }
 
 export interface TwitterTweetEmbedProps {
-  /**
-   * Tweet id that needs to be shown
-   */
   tweetId: string;
-  /**
-   * Additional options to pass to twitter widget plugin
-   */
   options?: JSONObject;
-  /**
-   * Placeholder while tweet is loading
-   */
   placeholder?: string | React.ReactNode;
-  /**
-   * Function to execute after load, return html element
-   */
   onLoad?: (element: any) => void;
 }
 
@@ -68,7 +56,6 @@ const TwitterTweetEmbed = (props: TwitterTweetEmbedProps): any => {
       }
     });
 
-    // cleaning up
     return () => {
       isComponentMounted = false;
     };

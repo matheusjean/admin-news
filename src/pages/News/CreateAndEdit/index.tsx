@@ -315,15 +315,6 @@ export default function CreateAndEditNews() {
           <RichTextEditor teste={text} onChange={setText} />
 
         </FormInputs>
-        {/*
-        <FormInputs>
-          <Label className="required" htmlFor="text">
-            Texto
-          </Label>
-
-          <InputText value={text} onChange={(e) => setText(e.target.value)} />
-
-        </FormInputs> */}
 
         <FormButtons>
           <Button

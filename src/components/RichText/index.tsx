@@ -59,7 +59,6 @@ export default function RichTextEditor({ teste, onChange }) {
     document.body.appendChild(script);
 
     return () => {
-      // Remova o script se o componente for desmontado
       document.body.removeChild(script);
     };
   }, []);
