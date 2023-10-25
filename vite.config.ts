@@ -8,4 +8,14 @@ export default defineConfig({
     host: "localhost",
     port: 3000,
   },
+  build: {
+    // Configurações de produção
+    target: "esnext", // ou a versão de ECMAScript desejada
+    minify: "terser",
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Limpar opções de chunking
+      },
+    },
+  },
 });
