@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/uuid": "^8.3.0",
     "@alquipo/eslint-config": "^1.3.2",
     "@tinymce/tinymce-react": "^4.3.0",
     "@types/react-icons": "^3.0.0",
+    "@types/uuid": "^8.3.0",
     "axios": "^0.27.2",
     "eslint-init": "^0.1.12",
     "react": "18",
