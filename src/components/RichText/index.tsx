@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 import { Editor } from '@tinymce/tinymce-react';
 
 import Button from '../Button';
+import TwitterTweetEmbed from '../TwitterTweetEmbed/TwitterTweetEmbed';
 import { FormButtons } from './styles';
 
 export default function RichTextEditor({ teste, onChange }) {
@@ -68,7 +68,7 @@ export default function RichTextEditor({ teste, onChange }) {
             'bold italic backcolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help | emoticons | fullpage | codesample | ' +
-            'nonbreaking | print | table | lists | image | media | link | code | forecolor | tweet', // Certifique-se de adicionar 'tweet' ao botão da barra de ferramentas
+            'nonbreaking | print | table | lists | image | media | link | code | forecolor',
           content_style: 'body { font-family: Helvetica, Arial, sans-serif; font-size: 14px }',
         }}
         value={teste}

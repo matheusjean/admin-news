@@ -8,6 +8,7 @@ import Button from '../../../components/Button'
 import Form from '../../../components/Form'
 import FormInputs from '../../../components/FormInputs'
 import Input from '../../../components/Input'
+import InputText from '../../../components/InputText'
 import Label from '../../../components/Label'
 import PageTitle from '../../../components/PageTitle'
 import RichTextEditor from '../../../components/RichText';
@@ -314,6 +315,15 @@ export default function CreateAndEditNews() {
           <RichTextEditor teste={text} onChange={setText} />
 
         </FormInputs>
+        {/*
+        <FormInputs>
+          <Label className="required" htmlFor="text">
+            Texto
+          </Label>
+
+          <InputText value={text} onChange={(e) => setText(e.target.value)} />
+
+        </FormInputs> */}
 
         <FormButtons>
           <Button
