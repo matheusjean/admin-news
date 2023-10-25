@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from 'styled-components'
+import { createGlobalStyle, css } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 :root {
@@ -59,6 +59,20 @@ const GlobalStyles = createGlobalStyle`
     color: red;
   }
 
-`
+  [id^='global-modal'] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
 
-export default GlobalStyles
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+`;
+
+export default GlobalStyles;
