@@ -755,6 +755,11 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.5.tgz#4751153abbf8d6199babb345a52e1eb4167d64af"
   integrity sha512-s/FPdYRmZR8SjLWGMCuax7r3qCWQw9QKHzXVukAuuIJkXkDRwp+Pu5LMIVFi0Fxbav35WURicYr8u1QsoybnQw==
 
+"@types/scriptjs@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@types/scriptjs/-/scriptjs-0.0.4.tgz#9692c3bb2c25862cc048c512021b9525ffefff9e"
+  integrity sha512-bSXw6vCgitpl2tfZelZ5PJamyBIlPhYQQ4JEga1/FpRvzs37EX35SCVoZO1xIJoUMIMshMBAEBR3RsWn8WpYMg==
+
 "@types/semver@^7.3.12":
   version "7.5.4"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.4.tgz#0a41252ad431c473158b22f9bfb9a63df7541cff"
