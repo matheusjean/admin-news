@@ -47,6 +47,23 @@ export default function RichTextEditor({ teste, onChange }) {
     }
   };
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.async = true;
+    script.onload = () => {
+      if (window.twttr) {
+        window.twttr.widgets.load();
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Remova o script se o componente for desmontado
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div>
       <Editor
@@ -68,7 +85,7 @@ export default function RichTextEditor({ teste, onChange }) {
             'bold italic backcolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help | emoticons | fullpage | codesample | ' +
-            'nonbreaking | print | table | lists | image | media | link | code | forecolor',
+            'nonbreaking | print | table | lists | image | media | link | code | forecolor | tweet', // Certifique-se de adicionar 'tweet' ao botão da barra de ferramentas
           content_style: 'body { font-family: Helvetica, Arial, sans-serif; font-size: 14px }',
         }}
         value={teste}
