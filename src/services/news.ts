@@ -15,6 +15,7 @@ interface NewsCreateUpdate {
   author?: string;
   image?: string;
   link?: string;
+  isHighlighted?: number;
   isActive?: boolean;
   categoryIds?: string[];
   categoriesToRemove?: string[];

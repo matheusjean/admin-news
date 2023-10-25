@@ -158,6 +158,7 @@ export default function CreateAndEditNews() {
         text,
         link,
         isActive,
+        isHighlighted,
         image,
         categoryIds: uniqueSelectedCategoryIds && selectedCategoryIds
       };
