@@ -9,6 +9,7 @@ import { FormButtons } from './styles';
 export default function RichTextEditor({ teste, onChange }) {
   const editorRef = useRef(null);
   const [editorContent, setEditorContent] = useState(teste);
+  const [valueToEditor, setValueToEditor] = useState(teste);
   const [tweetHTML, setTweetHTML] = useState('');
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function RichTextEditor({ teste, onChange }) {
     <div>
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue={editorContent}
+        initialValue={valueToEditor}
         init={{
           directionality: 'ltr',
           height: 500,
